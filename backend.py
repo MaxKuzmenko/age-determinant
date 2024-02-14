@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras.preprocessing import image
 
 
 class MML:
@@ -14,9 +15,8 @@ class MML:
         """Считывание изображения"""
 
         # Считываени файла:
-        img = tf.io.read_file(path_to_img)  # Открыть изображение
-        img = tf.image.decode_image(img, channels=3)  # Декодинг
-        img = tf.image.resize(img, self.new_shape)  # Ресайз
+        img = image.load_img(path_to_img, target_size=(224, 224))  #
+        img = image.img_to_array(img)
         img = img[tf.newaxis, :]  # Добавление batch dimension
         return img
 
